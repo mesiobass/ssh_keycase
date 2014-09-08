@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# 設定
+#export SSH_DIR="${HOME}/.ssh"
+export SSH_DIR="${HOME}/ssh_configure"
+export CONFIGS_DIR="${SSH_DIR}/conf.d"
+export SCRIPT_DIR=$(cd $(dirname $0); cd ../scripts; pwd)
+export DEFAULT_CONFIG_FILE="default.conf"
+export CONFIG_FILE="${SSH_DIR}/config"
+
+keycase_script_path=${SCRIPT_DIR}/${1}.bash
+[ ! -x ${keycase_script_path} ] && keycase_script_path=${SCRIPT_DIR}/usage.bash
+
+shift
+
+exec ${keycase_script_path} "$@"
