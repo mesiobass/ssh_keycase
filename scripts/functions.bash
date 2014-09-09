@@ -47,7 +47,7 @@ keycase_mkdir() {
 	fi
 
 	print_create ${dir_path}
-	mkdir -m 700 ${dir_path}
+	mkdir -m 700 -p ${dir_path}
 }
 
 # 指定ファイルがない場合は作成して、パーミッションを600に設定する
