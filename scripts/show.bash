@@ -1,38 +1,38 @@
 #!/usr/bin/env bash
 
+. ${SCRIPT_DIR}/functions.bash
 
-# 指定Host情報を表示
-keycase_show() {
-	if [ -f ${SSH_DIR}/config ]; then
-		local target=1
+# configファイルが存在しない場合はエラー
+if [ ! -e ${SSH_DIR}/config ]; then
+	log_error "config not found.\n" 1>&2
+	exit 0
+fi
 
-		sed -e '/^$/d' ${SSH_DIR}/config | while read line
-		do
-			line_ary=($(echo ${line} | tr -s ',' ' '))
-			if [ "${line_ary[0]}" = "#" ]; then
-				continue
-			fi
+target=1 # 指定したHostかフラグ
 
+# 空白、空行を除去したconfigファイルから指定したHost情報のみ抽出して表示
+sed -e '/^$/d' ${SSH_DIR}/config | while read line
+do
+	words=($(echo ${line} | tr -s ',' ' '))
+	# コメントアウトは無視
+	[ "${words[0]}" = "#" ] && continue
 
-			if [ "${line_ary[0]}" = "Host" ]; then
-				if [ "${line_ary[1]}" = $1 ]; then
-					target=0
-				else
-					if [ ${target} -eq 0 ]; then
-						break
-					fi
-
-					continue
-				fi
-			fi
-
-			if [ ${target} -ne 0 ]; then
-				continue
-			fi
+	# Host名の処理
+	if [ "${words[0]}" = "Host" ]; then
+		if [ "${words[1]}" = ${1} ]; then
+			target=0
 
 			printf "${line}\n"
-		done
-	fi
-}
+			continue
+		fi
 
-keycase_show "$@"
+		[ ${target} -eq 0 ] && break
+		continue
+	fi
+
+	[ ${target} -ne 0 ] && continue
+
+	printf "  ${line}\n"
+done
+
+exit $?
