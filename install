@@ -7,7 +7,7 @@ git_command=$(which git)
 
 
 # gitがあるか？
-if [ ! -z "${git_command}" ]; then
+if [ -z "${git_command}" ]; then
 	printf "git command not found\n"
 	exit 1
 fi
