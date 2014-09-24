@@ -3,22 +3,28 @@
 repourl="https://github.com/mesiobass/ssh_keycase.git"
 local_dir_path="${HOME}/.ssh_keycase"
 path_add_script='PATH=${PATH}:${HOME}/.ssh_keycase/bin'
+git_command=$(which git)
 
 
-# 1) gitがあるか？
-if [ ! $(which git) ]; then
-	echo "no git"
+# gitがあるか？
+if [ ! -z "${git_command}" ]; then
+	printf "git command not found\n"
 	exit 1
 fi
 
-# 2) ホームディレクトリにインストール
-git clone ${repourl} ${local_dir_path}
+# ホームディレクトリにインストール
+set -x
+${git_command} clone ${repourl} ${local_dir_path}
+set +x
 
-# 3) bashrcにパス通し
+# .bashrcにパス通し
 if [ -e ~/.bashrc ]; then
-	echo "${path_add_script}" >> ~/.bashrc
+	set -x
+	echo "${path_add_script} # Add keycase to PATH for scripting." >> ~/.bashrc
+	set +x
 fi
 
+# 終了
+printf "done.\n\n"
 
-
-
+exit $?
