@@ -4,6 +4,7 @@ repourl="https://github.com/mesiobass/ssh_keycase.git"
 local_dir_path="${HOME}/.ssh_keycase"
 path_add_script='PATH=${PATH}:${HOME}/.ssh_keycase/bin'
 git_command=$(which git)
+echo "${git_command}"
 
 
 # gitがあるか？
