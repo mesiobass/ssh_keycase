@@ -1,10 +1,10 @@
 ssh_keycase
 ===========
 
-This is the bash script to make it easier to manage the configuration.
+ssh configを管理しやすくする為のbashコマンドです
 
-* organizing and managing the .ssh/config file
-* organizing and managing the private key
+* .sshのconfigファイルの整理、管理
+* private keyの整理、管理
 
 #### Example
 
@@ -34,19 +34,19 @@ Installation
 Getting Started
 ---------------
 
-#### Create the directories and files needed to manage
+#### 管理に必要なディレクトリ、ファイルの作成
 ~~~
 keycase init
 ~~~
 
-* create .ssh directory
-* create .ssh/conf.d directory
-* create .ssh/conf.d/default.conf file
+* .sshディレクトリの作成
+* .ssh/conf.dディレクトリの作成
+* .ssh/conf.d/default.confファイルの作成
 
 | directory or file name  | description         |
 | :---------------------- |--------------------:|
-| .ssh/conf.d             | directory in which to manage the config file by category |
-| .ssh/conf.d/default.conf| file that manages the setting to be used in common |
+| .ssh/conf.d             | 分類されたconfigファイルを管理するディレクトリ |
+| .ssh/conf.d/default.conf| 全てのconfigファイルで共通で使用する設定を管理するファイル      |
 
 Usage
 -----
@@ -55,29 +55,29 @@ Usage
 	
 ### 1. keycase
 
-#### Generate config file
+#### configファイル生成
 
 ~~~
 keycase save
 ~~~
 
-* generate the .ssh/config file by merging all the files in .ssh/conf.d directory
+* .ssh/conf.dディレクトリ内の全てのファイルをマージして.ssh/configファイルを生成
 
-#### Show host list
+#### 設定しているホストリストを表示
 
 ~~~
 keycase list
 ~~~
 
-#### Show host detail that your specify
+#### 指定したホスト情報を表示
 
 ~~~
 keycase show [Host]
 ~~~
 
-* Specify the [Host] keyword in the .ssh/config file
+* configファイルにあるHostキーワードを指定
 
-#### Show help
+#### ヘルプ表示
 
 ~~~
 keycase usage
@@ -89,7 +89,7 @@ Or
 keycase help
 ~~~
 
-#### Show the keycase version installed
+#### バージョン表示
 
 ~~~
 keycase version
@@ -97,18 +97,17 @@ keycase version
 
 ### 2. keycase keyset
 
-* sub-command to create a directory for managing each category the private key
+* private keyをカテゴリ毎に管理する為のディレクトリを作成するサブコマンド
 
-#### Create a category direction
-
+#### カテゴリ分けの為のディレクトリ作成
 
 ~~~
 keycase keyset create [Category]
 ~~~
 
-* create .ssh/key.d directory
-* create .ssh/key.d/[Catfegory] directory
-* create .ssh/conf.d/[Category].conf file
+* .ssh/key.dディレクトリを作成
+* .ssh/key.d/[Category]ディレクトリを作成
+* .ssh/conf.d/[Category].confファイルを作成
 
 License
 =======
