@@ -19,11 +19,11 @@ This is the bash script to make it easier to manage the configuration.
 └── key.d
     ├── private
     │   └── gitrepos
-    │       ├─- id_rsa.github
+    │       ├── id_rsa.github
     │       └── id_rsa.bitbucket
     └─- dev_servers
-        ├─- id_rsa.dev1
-        └─- id_rsa.dev2
+        ├── id_rsa.dev1
+        └── id_rsa.dev2
 ~~~
 
 
