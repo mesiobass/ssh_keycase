@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 # 設定
-#export SSH_DIR="${HOME}/.ssh"
-export SSH_DIR="${HOME}/ssh_configure"
+export SSH_DIR="${HOME}/.ssh"
 export CONFIGS_DIR="${SSH_DIR}/conf.d"
 export SCRIPT_DIR=$(cd $(dirname $0); cd ../scripts; pwd)
 export DEFAULT_CONFIG_FILE="default.conf"
